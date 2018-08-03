@@ -3,6 +3,7 @@ import { Person } from './person';
 import { Http, Response } from '@angular/http';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,8 +34,8 @@ export class AppComponent implements OnInit{
   onSubmit(): void {
     console.log(this.model);
     //this.messgae = this.myValidate() ? 'Success' : 'Unable to submit form please fix errors';
-    this.persons.push(this.model);
-
+    this.persons.push(new Person(this.model.firstName, this.model.lastName, this.model.address, this.model.email, this.model.phone));
+    this.model  = new Person('','','','','');
   }
   //myValidate(): boolean {
     //const phDigits = this.model.ph.replace(/\D/g,'' );
