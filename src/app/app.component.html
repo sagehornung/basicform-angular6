@@ -1,20 +1,64 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Welcome to my simple form succesful saves go below
   </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div class="container">
+  <h1>Person Form</h1>
+
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+      <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+        <div appHighlight *ngIf="firstName.errors.required" class="err">First Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required />
+      <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+        <div appHighlight *ngIf="lastName.errors.required" class="err">Last Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+      <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+        <div appHighlight *ngIf="email.errors.required" class="err">Email is required</div>
+        <div appHighlight *ngIf="email.errors.email" class="err">Email must be a valid email address</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" required />
+      <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+        <div appHighlight *ngIf="address.errors.required" class="err">Address is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="number" class="form-control" name="address" [(ngModel)]="model.phone" #phone="ngModel" [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" required minlength="10" maxlength="10" />
+      <div *ngIf="f.submitted && phone.invalid" class="invalid-feedback">
+        <div appHighlight *ngIf="phone.errors.required" class="err">Phone is required</div>
+        <div appHighlight *ngIf="phone.errors.minlength || phone.errors.maxlength" class="err">Phone must contain 10 digits</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <h2>Persons</h2>
+  <ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let person of persons">
+      <span>{{person.firstName}}</span> | <span>{{person.lastName}}</span> | <span>{{person.address}}</span> | <span>{{person.email}}</span> | <span>{{person.phone}}</span>
+    </li>
+  </ul>
+</div>
+
 
