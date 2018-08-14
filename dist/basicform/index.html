@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+  <script src="script.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<style>
+  .err {
+    color: red;
+  }
+</style>
+<body ng-controller="form">
+
+
+  <div style="height: 150px;"></div>
+  <div class="container">
+    <div class="row">
+      <h3>Enter a valid person</h3>
+      <p>First Name : <input type="text" ng-model="model.first" placeholder="Enter first name"></p>
+      <p class="err" ng-show="firstErr">Must enter first name</p>
+      <p>Last Name : <input type="text" ng-model="model.last" placeholder="Enter last name"></p>
+      <p class="err" ng-show="lastErr">Must enter last name</p>
+      <p>Address : <input type="text" ng-model="model.address" placeholder="Enter address here"></p>
+      <p class="err" ng-show="addErr">Must enter address</p>
+      <p>Phone : <input type="text" ng-model="model.phone" placeholder="Enter phone here"></p>
+      <p class="err" ng-show="phErr">Must enter 10 digit number</p></p>
+      <p>Email : <input type="email" ng-model="model.email" placeholder="Enter email here"></p>
+      <p class="err" ng-show="emailErr">Please enter a valid email address</p>
+      <button ng-click="submitForm()">
+        Submit
+      </button>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <h3>Search for a person</h3>
+      <p>Search : <input type="text" ng-model="searchStr" placeholder="Search for"></p>
+      <button ng-click="search()">
+        Submit
+      </button>
+    </div>
+
+   <br/>
+
+
+
+  <div class="row" ng-show="foundPeople">
+    <div ng-repeat="p in persons">
+
+    <p>Found {{$index + 1}}</p>
+    <p>First Name : <input type="text" ng-model="persons[$index].first" placeholder="Enter first name"></p>
+    <p class="err" ng-show="persons[$index].firstErr">Must enter first name</p>
+    <p>Last Name : <input type="text" ng-model="persons[$index].last" placeholder="Enter last name"></p>
+    <p class="err" ng-show="persons[$index].lastErr">Must enter last name</p>
+    <p>Address : <input type="text" ng-model="persons[$index].address" placeholder="Enter address here"></p>
+    <p class="err" ng-show="persons[$index].addErr">Must enter address</p>
+    <p>Phone : <input type="text" ng-model="persons[$index].phone" placeholder="Enter phone here"></p>
+    <p class="err" ng-show="persons[$index].phErr">Must enter 10 digit number</p></p>
+    <p>Email : <input type="email" ng-model="persons[$index].email" placeholder="Enter email here"></p>
+    <p class="err" ng-show="persons[$index].emailErr">Please enter a valid email address</p>
+    <button ng-click="edit($index)">
+      Edit
+    </button>
+    </div>
+  </div>
+
+
+  </div>
+
+</body>
+
+</html>
